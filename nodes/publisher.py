@@ -34,6 +34,7 @@ def main() -> None:
   pub_frequency: int = rospy.get_param("~rate", ROS_PARAM_PUB_RATE)
 
   # Q: Почему здесь не нужно писать rospy.resolve_name(ROS_IMAGE_TOPIC)?
+  # A: потому что тут уже разрешаются имена.
   publisher = rospy.Publisher(ROS_IMAGE_TOPIC, Image, queue_size=10)
   # subscriber = rospy.Subscriber("pylon_camera_node/image_raw", Image, cam_callback)
   # Обратите внимание: топик "image" может переименоваться при запуске ROS-узла.
@@ -51,12 +52,6 @@ def main() -> None:
     # Разрешение: 320 x 240 (ширина x высота).
     # Формат пикселей: монохром, 8-бит.
     # Создайте функцию для генерации изображения "generate_image(width = 320, height = 240)".
-    # publisher.publish(Image(width=0, height=0, encoding='mono8'))
-    # data = generate_image(width = 320, height = 240)
-    # IMAGE.data = data
-    # IMAGE.width = 320
-    # IMAGE.height = 240
-    # publisher.publish(IMAGE)
     
     image = generate_image()
         
